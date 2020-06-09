@@ -3,7 +3,7 @@ import { Actions, FavouritesStoreActions } from '../actions/fav.actions';
 
 
 export interface IFavourites {
-    id: number;
+    id: string;
     title: string;
     year: string;
     type: string;
@@ -15,15 +15,7 @@ export interface IFavouritesListStoreState {
 }
 
 export const favouritesListInitialState: IFavouritesListStoreState = {
-    list: [
-        {
-            id: -1,
-            title: "",
-            year: "",
-            type: "",
-            poster: ""
-        }
-    ],
+    list: [],
 };
 
 

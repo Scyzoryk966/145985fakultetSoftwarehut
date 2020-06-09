@@ -1,9 +1,27 @@
 import React from 'react';
 import NavPanel from '../../components/navPanel/NavPanel'
+import deBounce from "../../hooks/deBounce";
+import { useService} from "../../hooks/useService";
+import { FavouritesService } from '../../services/fav.service';
+import { useSelector } from 'react-redux';
+import { favouritesSelector } from '../../store/selectors/fav.selectors';
+
 import movieService, { IMoviesProps } from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
+import {
+    Button,
+    ButtonBase,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    CardMedia,
+    IconButton,
+    Typography
+} from "@material-ui/core";
+
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
     table: {
@@ -12,12 +30,10 @@ const useStyles = makeStyles({
     },
     root: {
         maxWidth: 400,
-        padding: '20px',
         marginBottom: 20,
         marginRight: 'auto',
         marginLeft: 'auto',
         textAlign: 'center',
-        border: '3px solid black',
     },
     media: {
         height: 450,
@@ -34,18 +50,38 @@ const SearchMovie = () => {
     const classes = useStyles();
     const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
     const [movieToSearch, setMovieToSearch] = React.useState('');
+    const debounce = deBounce(movieToSearch, 500);
+
+    const favouritesService = useService(FavouritesService);
+    const favourites = useSelector(favouritesSelector);
 
     React.useEffect(() => {
-        movieService.searchByName(movieToSearch).then(resp => {
-            if (resp) {
-                setMovies(resp);
-            }
+        if (debounce){
+            movieService.searchByName(movieToSearch).then(resp => {
+                if (resp) {
+                    setMovies(resp);
+                }
+                else
+                {
+                    setMovies(null);
+                }
+            });
+
+            //movieService.searchById('tt0848228');
+        }
+
+    }, [debounce, movieToSearch]);
+
+    const handleAddFavourites = (props : any) => {
+        favouritesService.setNewFavourites({
+            id: props.id,
+            title: props.title,
+            year: props.year,
+            type: props.type,
+            poster: props.poster
         });
-
-        movieService.searchById('tt0848228');
-    }, [movieToSearch]);
-
-
+        console.log(favourites)
+    }
     return (
         <div>
             <NavPanel/>
@@ -64,8 +100,8 @@ const SearchMovie = () => {
             />
                         {!!movies?.movies.length &&
                         movies?.movies.map(movie => (
-                            <Card className={classes.root}>
-                                <CardActionArea>
+                            <Card className={classes.root} variant="outlined">
+                                <CardActionArea >
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">
                                             <p>{movie.title}<br />{movie.year}</p>
@@ -80,16 +116,22 @@ const SearchMovie = () => {
                                         title={movie.title}
                                     />
                                 </CardActionArea>
+                                <CardActions>
+                                    {/*TODO: zrobić zmiane buttona po dodaniu fav i fav całe*/}
+                                    {favourites.filter(el => el.id !== movie.id) ?
+                                        <Button onClick={() => handleAddFavourites(movie)} size="small" color="primary">
+                                        Dodaj do ulubionych
+                                        </Button>
+                                        :
+                                        ''
+                                    }
+
+                                    <Button size="small" color="primary">
+                                        Nic
+                                    </Button>
+                                </CardActions>
                             </Card>
-                            /*<TableRow key={movie.id}>
-                                <TableCell>
-                                    <img src={movie.poster}
-                                         alt={movie.title}/>
-                                </TableCell>
-                                <TableCell align="right"> {movie.title}</TableCell>
-                                <TableCell align="right"> {movie.type}</TableCell>
-                                <TableCell align="right"> {movie.year}</TableCell>
-                            </TableRow>*/
+
                         ))
                         }
 
