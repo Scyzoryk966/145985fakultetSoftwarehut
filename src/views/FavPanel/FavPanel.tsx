@@ -1,27 +1,27 @@
 import React from 'react';
 import { useService } from '../../hooks/useService';
-import { TodoService } from '../../services/todo.service';
+import { FavouritesService } from '../../services/fav.service';
 import { useSelector } from 'react-redux';
-import { todosSelector } from '../../store/selectors/todos.selectors';
+import { favouritesSelector } from '../../store/selectors/fav.selectors';
 
 
-const TodoPanel = () => {
-  const todoService = useService(TodoService);
-  const todos = useSelector(todosSelector);
+const FavPanel = () => {
+  const favouritesService = useService(FavouritesService);
+  const favourites = useSelector(favouritesSelector);
 
   React.useEffect(() => {
-    todoService.setNewTodo({
-      done: false,
-      label: 'nowe todo',
-      description: 'opis todo',
-      id: 1
+    favouritesService.setNewFavourites({
+      id: 1,
+      title: "123123123",
+      year: "1111",
+      type: "123",
+      poster: "1234"
     });
-    alert("<div>{todos.map((todo, index) => <div key={index}>{todo.label}</div>)}</div>");
-  }, [todoService]);
+  }, []);
 
 
-  return <div>{todos.map((todo, index) => <div key={index}>{todo.label}</div>)}</div>;
+  return <div>{favourites.map((favourites, index) => <div key={index}>{favourites.title}</div>)}</div>;
 };
 
 
-export default TodoPanel;
+export default FavPanel;

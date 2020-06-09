@@ -3,7 +3,10 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Movie from './views/movie/Movie';
 import SearchMovie from './views/searchMovie/SearchMovie';
 import Home from './views/home/Home';
-import Prowider
+import TodoPanel from './views/todoPanel/TodoPanel';
+import FavPanel from './views/FavPanel/FavPanel';
+import { Provider } from 'react-redux';
+import store from './store';
 
 //yarn add @types/react-router-dom  @types/react-router
 
@@ -12,12 +15,15 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-          <Prowider
-        <Switch>
-          <Route path="/movie" component={Movie} />
-          <Route path="/search" component={SearchMovie} />
-          <Route path="/" component={Home} />
-        </Switch>
+        <Provider store={store}>
+          <Switch>
+            <Route path="/movie" component={Movie}/>
+            <Route path="/search" component={SearchMovie}/>
+            <Route path="/todo" component={TodoPanel}/>
+            <Route path="/fav" component={FavPanel}/>
+            <Route path="/" component={Home}/>
+          </Switch>
+        </Provider>
       </BrowserRouter>
     </div>
   );

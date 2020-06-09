@@ -26,7 +26,7 @@ export const todosListInitialState: ITodosListStoreState = {
 
 export const todosStoreReducer: Reducer<ITodosListStoreState, Actions> = (state: ITodosListStoreState = todosListInitialState, actions: Actions) => {
   switch (actions.type) {
-    case TodoStoreActions.SET_NEW_TODO :
+    case TodoStoreActions.SET_NEW_FAV :
       return {
         ...state,
         list: [...state.list, actions.payload.todo]

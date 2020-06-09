@@ -1,53 +1,39 @@
-import { ITodo } from '../reducers/todos.reducer';
+import { IFavourites } from '../reducers/fav.reducer';
 
-export enum TodoStoreActions {
-  SET_TODO_DONE = 'SET_TODO_DONE',
-  SET_NEW_TODO = 'SET_NEW_TODO',
-  SET_DELETE_TODO = 'SET_DELETE_TODO',
+export enum FavouritesStoreActions {
+  SET_NEW_FAV = 'SET_NEW_FAV',
+  SET_DELETE_FAV = 'SET_DELETE_FAV',
 }
 
 
-export interface ISetTodoDone {
-  type: TodoStoreActions.SET_TODO_DONE,
+export interface ISetNewFavourites {
+  type: FavouritesStoreActions.SET_NEW_FAV,
   payload: {
-    id: number,
+    favourites: IFavourites
   }
 }
 
-export interface ISetNewTodo {
-  type: TodoStoreActions.SET_NEW_TODO,
+export interface ISetDeleteFavourites {
+  type: FavouritesStoreActions.SET_DELETE_FAV,
   payload: {
-    todo: ITodo
+    favourites: IFavourites
   }
 }
 
-export interface ISetDeleteTodo {
-  type: TodoStoreActions.SET_DELETE_TODO,
-  payload: {
-    todo: ITodo
-  }
-}
-
-export const todosActions = {
-  setNewTodo: (todo: ITodo) => ({
-    type: TodoStoreActions.SET_NEW_TODO,
+export const favouritesActions = {
+  setNewFavourites: (favourites: IFavourites) => ({
+    type: FavouritesStoreActions.SET_NEW_FAV,
     payload: {
-      todo
+      favourites
     }
   }),
-  setTodoDone: (id: number) => ({
-    type: TodoStoreActions.SET_TODO_DONE,
+  setDeleteFavourites: (favourites: IFavourites) => ({
+    type: FavouritesStoreActions.SET_DELETE_FAV,
     payload: {
-      id
-    }
-  }),
-  setDeleteTodo: (todo: ITodo) => ({
-    type: TodoStoreActions.SET_DELETE_TODO,
-    payload: {
-      todo
+      favourites
     }
   })
 };
 
 
-export type Actions = ISetTodoDone & ISetNewTodo & ISetDeleteTodo;
+export type Actions =  ISetNewFavourites & ISetDeleteFavourites;

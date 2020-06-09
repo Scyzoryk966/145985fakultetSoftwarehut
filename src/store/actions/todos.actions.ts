@@ -2,7 +2,7 @@ import { ITodo } from '../reducers/todos.reducer';
 
 export enum TodoStoreActions {
   SET_TODO_DONE = 'SET_TODO_DONE',
-  SET_NEW_TODO = 'SET_NEW_TODO',
+  SET_NEW_FAV = 'SET_NEW_FAV',
   SET_DELETE_TODO = 'SET_DELETE_TODO',
 }
 
@@ -15,7 +15,7 @@ export interface ISetTodoDone {
 }
 
 export interface ISetNewTodo {
-  type: TodoStoreActions.SET_NEW_TODO,
+  type: TodoStoreActions.SET_NEW_FAV,
   payload: {
     todo: ITodo
   }
@@ -30,7 +30,7 @@ export interface ISetDeleteTodo {
 
 export const todosActions = {
   setNewTodo: (todo: ITodo) => ({
-    type: TodoStoreActions.SET_NEW_TODO,
+    type: TodoStoreActions.SET_NEW_FAV,
     payload: {
       todo
     }

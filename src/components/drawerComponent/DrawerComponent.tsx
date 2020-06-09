@@ -41,8 +41,8 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
             >
                 <div className={classes.drawerContent}>
                     <p ><HomeIcon className={classes.icon}>Home</HomeIcon>{RedirectTo('/', 'Home')}</p>
-                        <p><MovieIcon className={classes.icon}>Movie</MovieIcon>{RedirectTo('/movie', 'Movie')}</p>
-                        <p><SearchIcon className={classes.icon}>Search</SearchIcon>{RedirectTo('/search', 'Search Movie')}</p>
+                    <p><MovieIcon className={classes.icon}>Movie</MovieIcon>{RedirectTo('/movie', 'Movie')}</p>
+                    <p><SearchIcon className={classes.icon}>Search</SearchIcon>{RedirectTo('/search', 'Search Movie')}</p>
                 </div>
             </Drawer>
         </div>

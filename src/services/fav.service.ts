@@ -1,19 +1,16 @@
-import { IFavourites } from '../store/reducers/todos.reducer';
+import { IFavourites } from '../store/reducers/fav.reducer';
 import store from '../store';
-import { todosActions } from '../store/actions/todos.actions';
+import { favouritesActions } from '../store/actions/fav.actions';
 
-export class TodoService {
+export class FavouritesService {
 
-  setNewTodo(todo: IFavourites) {
-   store.dispatch(todosActions.setNewTodo(todo));
+  setNewFavourites(favourites: IFavourites) {
+   store.dispatch(favouritesActions.setNewFavourites(favourites));
   }
 
-  deleteTodo(todo: IFavourites) {
-    store.dispatch(todosActions.setDeleteTodo(todo));
+  deleteFavourites(favourites: IFavourites) {
+    store.dispatch(favouritesActions.setDeleteFavourites(favourites));
   }
 
-  setTodoDone(todo: IFavourites) {
-    store.dispatch(todosActions.setTodoDone(todo.id));
-  }
 
 }
