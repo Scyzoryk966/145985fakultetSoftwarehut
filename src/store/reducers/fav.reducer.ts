@@ -1,7 +1,10 @@
 import { Reducer } from 'redux';
 import { Actions, FavouritesStoreActions } from '../actions/fav.actions';
+import Cookies from 'universal-cookie';
 
 
+const cookies = new Cookies();
+let init = [];
 export interface IFavourites {
     id: string;
     title: string;
@@ -13,12 +16,16 @@ export interface IFavourites {
 export interface IFavouritesListStoreState {
     list: IFavourites[];
 }
-//TODO: dodać cookie to do initial store
+
+if(cookies.get('fav')!==undefined)
+{
+    init = cookies.get('fav')
+}
 export const favouritesListInitialState: IFavouritesListStoreState = {
-    list: [],
+    list: init,
 };
 
-
+console.log(cookies.get('myCat'))
 export const favouritesStoreReducer: Reducer<IFavouritesListStoreState, Actions> = (state: IFavouritesListStoreState = favouritesListInitialState, actions: Actions) => {
     switch (actions.type) {
         case FavouritesStoreActions.SET_NEW_FAV :

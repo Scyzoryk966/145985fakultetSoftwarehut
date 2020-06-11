@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 import movieService, { IMoviesProps } from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Cookies from 'universal-cookie';
 import {
     Button,
     Card,
@@ -18,7 +19,7 @@ import {
     CardMedia,
     Typography
 } from "@material-ui/core";
-import {Link} from "react-router-dom";
+
 
 
 const useStyles = makeStyles({
@@ -61,8 +62,20 @@ const SearchMovie = () => {
     const history = useHistory();
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
+    const cookies = new Cookies();
 
-    const RedirectTo = (path: string, name: string, state: { id: string }) => <Button color="secondary" className={classes.action} onClick={() => history.push(path, state)}>{name}</Button>
+    const RedirectTo = (
+        path: string,
+        name: string,
+        state:
+            {
+                id: string,
+                title: string,
+                year: string,
+                type: string,
+                poster: string,
+            }
+    ) => <Button color="secondary" className={classes.action} onClick={() => history.push(path, state)}>{name}</Button>
 
     //TODO: poprawić debounce
     React.useEffect(() => {
@@ -90,7 +103,6 @@ const SearchMovie = () => {
             type: props.type,
             poster: props.poster
         });
-        console.log(favourites)
     }
 
     const handleDelFavourites = (props : any) => {
@@ -102,7 +114,7 @@ const SearchMovie = () => {
             poster: props.poster
         });
     }
-
+    cookies.set('fav', favourites, { path: '/' });
     return (
         <div>
             <NavPanel/>
@@ -157,7 +169,12 @@ const SearchMovie = () => {
                                             Dodaj do ulubionych
                                         </Button>
                                     }
-                                        {RedirectTo("/searchDetail/"+movie.id, 'Szczegóły', {id: movie.id})}
+                                        {RedirectTo("/searchDetail/"+movie.id, 'Szczegóły', {
+                                            id: movie.id,
+                                            title: movie.title,
+                                            year: movie.year,
+                                            type: movie.type,
+                                            poster: movie.poster})}
                                 </CardActions>
                             </Card>
                         ))
@@ -166,5 +183,4 @@ const SearchMovie = () => {
         </div>
     );
 };
-
 export default SearchMovie;

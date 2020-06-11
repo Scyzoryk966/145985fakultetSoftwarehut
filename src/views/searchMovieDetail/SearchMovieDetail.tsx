@@ -4,7 +4,6 @@ import { useService} from "../../hooks/useService";
 import { FavouritesService } from '../../services/fav.service';
 import { useSelector } from 'react-redux';
 import { favouritesSelector } from '../../store/selectors/fav.selectors';
-import {useHistory} from "react-router";
 import movieService, { IMoviesProps } from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -17,26 +16,37 @@ import {
     CardMedia,
     Typography
 } from "@material-ui/core";
-import {Link} from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 
 
 const useStyles = makeStyles({
     root: {
+        marginTop: "6vh",
         marginBottom: "1vh",
         marginLeft: "1.5vw",
         display: "inline-block",
         width: '30vw',
-        height: '80vh',
+        height: '85vh',
         textAlign: 'center',
+    },
+    root2: {
+        marginTop: "6vh",
+        marginBottom: "1vh",
+        marginLeft: "1.5vw",
+        display: "inline-block",
+        width: '65.5vw',
+        height: '85vh',
+        textAlign: 'left',
     },
     content: {
         maxHeight:'15vh',
         overflow: 'hidden',
+        padding: 20
     },
     media: {
         marginTop : "1vh",
-        height:'53vh',
+        height:'70vh',
     },
     center: {
         marginLeft: 'calc(50% - 16vw)',
@@ -50,32 +60,69 @@ const useStyles = makeStyles({
         marginRight: 'auto',
         marginLeft: 'auto',
     },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
 });
 
 
 const SearchMovieDetail = (props :any) => {
     const classes = useStyles();
-    const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
-    const [movieToSearch, setMovieToSearch] = React.useState('');
-    const [reciveId, setId] = React.useState('');
-    const history = useHistory();
+    const [reciveMovie, setMovie] = React.useState({
+        id: '',
+        title: '',
+        year: '',
+        type: '',
+        poster: '',
+    });
+    const [movieInfo, setMovieInfo] = React.useState({
+        actors: '',
+        ageRating: '',
+        awards: '',
+        director: '',
+        plot: '',
+        poster: '',
+        production: '',
+        rating: '',
+        releaseDate: '',
+        title: '',
+        votes: '',
+        writer: '',
+    });
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
+    const cookies = new Cookies();
 
     React.useEffect(() => {
-            setId(props.location.state.id)
-            movieService.searchById('tt0848228').then(resp => {
-                if (resp) {
-                    //setMovies(resp);
-                    console.log(resp)
-                }
-                else
-                {
-                    setMovies(null);
-                }
-            });
-
-    }, []);
+        setMovie(props.location.state)
+        movieService.searchById(reciveMovie.id).then(resp => {
+            if (resp) {
+                setMovieInfo({
+                    actors: resp.actors,
+                    ageRating: resp.rating,
+                    awards: resp.awards,
+                    director: resp.director,
+                    plot: resp.plot,
+                    poster: resp.poster,
+                    production: resp.production,
+                    rating: resp.rating,
+                    releaseDate: resp.releaseDate,
+                    title: resp.title,
+                    votes: resp.votes,
+                    writer: resp.writer,
+                })
+            }
+        });
+        console.log('halo?')
+    },[reciveMovie]);
 
     const handleAddFavourites = (props : any) => {
         favouritesService.setNewFavourites({
@@ -97,50 +144,57 @@ const SearchMovieDetail = (props :any) => {
             poster: props.poster
         });
     }
-
+    cookies.set('fav', favourites, { path: '/' });
     return (
         <div>
             <NavPanel/>
             <br />
             <br />
-            <br />
-            <h1>działa{reciveId}</h1>
-           {/* <TextField
-                className={classes.center}
-                color="secondary"
-                id="outlined-full-width"
-                label="Wyszukaj Film"
-                placeholder="Tytuł filmu"
-                fullWidth
-                margin="normal"
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                variant="outlined"
-                onChange={event => setMovieToSearch(event.target.value)}
-            />
-            <br />
-                        {!!movies?.movies.length &&
-                        movies?.movies.map((movie, index) => (
+
                             <Card className={classes.root} color="secondary" variant="outlined">
                                 <CardActionArea >
                                     <CardContent className={classes.content}>
                                         <Typography className={classes.content} gutterBottom variant="h6" component="h2">
-                                            <p>{movie.title}<br />{movie.year}</p>
+                                            <p>{movieInfo.title}</p>
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
-                                            {movie.type}
+                                            {movieInfo.director}
                                         </Typography>
                                     </CardContent>
                                     <CardMedia
                                         className={classes.media}
-                                        image={movie.poster !== "N/A" ? movie.poster : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
-                                        title={movie.title}
+                                        image={movieInfo.poster !== "N/A" ? movieInfo.poster : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
+                                        title={movieInfo.title}
                                     />
                                 </CardActionArea>
-                                <CardActions>
-                                    {favourites.filter(f => f.id === movie.id).length ?
-                                        <Button onClick={() => handleDelFavourites(movie)}
+                            </Card>
+            <Card className={classes.root2} variant="outlined">
+                <CardContent>
+                    <Typography className={classes.title} color="textPrimary" gutterBottom variant="h2" component="h1">
+                        <h2>Information:</h2>
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                        Actors: {movieInfo.actors}
+                    </Typography>
+                    <Typography className={classes.pos} color="secondary">
+                        Rating: {movieInfo.rating}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                        Awards: {movieInfo.awards}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                        Plot: {movieInfo.plot}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                        Production: {movieInfo.production}
+                    </Typography>
+                    <Typography className={classes.pos} color="textPrimary">
+                        Release Date: {movieInfo.releaseDate}
+                    </Typography>
+                </CardContent>
+                <CardActions >
+                    {favourites.filter(f => f.id === reciveMovie.id).length ?
+                                        <Button onClick={() => handleDelFavourites(reciveMovie)}
                                                 size="small"
                                                 color="secondary" variant="outlined"
                                                 className={classes.action}
@@ -148,7 +202,7 @@ const SearchMovieDetail = (props :any) => {
                                             Usuń z ulubionych
                                         </Button>
                                         :
-                                        <Button onClick={() => handleAddFavourites(movie)}
+                                        <Button onClick={() => handleAddFavourites(reciveMovie)}
                                                 size="small"
                                                 color="secondary" variant="outlined"
                                                 className={classes.action}
@@ -156,14 +210,8 @@ const SearchMovieDetail = (props :any) => {
                                             Dodaj do ulubionych
                                         </Button>
                                     }
-                                    <Button component={Link} to={"/search/"+movie.id} color="secondary" className={classes.action}>
-                                        Szczegóły
-                                    </Button>
-                                </CardActions>
-                            </Card>
-                        ))
-                        }*/}
-
+                </CardActions>
+            </Card>
         </div>
     );
 };

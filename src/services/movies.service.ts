@@ -150,8 +150,21 @@ const movieService = {
     searchById: async (id: string) => {
         try {
             const resultById: IMovieResponse = await http.get(API.SEARCH_BY_ID(id));
-            console.log(resultById);
-            return resultById
+            const result: IMovieProps = {
+                production: resultById.Production,
+                plot: resultById.Plot,
+                title: resultById.Title,
+                ageRating: resultById.Rated,
+                releaseDate: resultById.Released,
+                writer: resultById.Writer,
+                director: resultById.Director,
+                actors: resultById.Actors,
+                awards: resultById.Awards,
+                rating: resultById.Rated,
+                votes: resultById.DVD,
+                poster: resultById.Poster,
+            }
+            return result
         } catch (e) {
             console.log(e);
         }
