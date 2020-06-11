@@ -1,19 +1,23 @@
 import React from 'react';
-import { Drawer } from '@material-ui/core';
+import {Button, Drawer} from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory } from 'react-router';
 import HomeIcon from '@material-ui/icons/Home';
 import MovieIcon from '@material-ui/icons/Movie';
 import SearchIcon from '@material-ui/icons/Search';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const makeClasses = makeStyles((theme: Theme) => ({
     drawerContent: {
         margin: '20px',
+        width: '20vh',
+        padding: '10px',
     },
-    icon: {
-        marginBottom: '-5px',
-        marginRight: '5px',
-    }
+    button: {
+        margin: theme.spacing(1),
+        padding: '10px',
+        width: "20vh"
+    },
 }));
 
 interface IDrawerComponentProps {
@@ -40,9 +44,38 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                 }}
             >
                 <div className={classes.drawerContent}>
-                    <p ><HomeIcon className={classes.icon}>Home</HomeIcon>{RedirectTo('/', 'Home')}</p>
-                    <p><MovieIcon className={classes.icon}>Movie</MovieIcon>{RedirectTo('/movie', 'Movie')}</p>
-                    <p><SearchIcon className={classes.icon}>Search</SearchIcon>{RedirectTo('/search', 'Search Movie')}</p>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        startIcon={<HomeIcon />}
+                    >
+                        {RedirectTo('/', 'Home')}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        startIcon={<MovieIcon />}
+                    >
+                        {RedirectTo('/movie', 'Movie')}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        startIcon={<SearchIcon />}
+                    >
+                        {RedirectTo('/search', 'Search')}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        className={classes.button}
+                        startIcon={<FavoriteIcon />}
+                    >
+                        {RedirectTo('/fav', 'Favourites')}
+                    </Button>
                 </div>
             </Drawer>
         </div>

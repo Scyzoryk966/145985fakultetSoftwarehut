@@ -21,25 +21,30 @@ import {
     Typography
 } from "@material-ui/core";
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: '650px',
-        maxWidth: '100%',
-    },
     root: {
-        maxWidth: 400,
-        marginBottom: 20,
-        marginRight: 'auto',
-        marginLeft: 'auto',
+        marginBottom: "1vh",
+        marginLeft: "1.5vw",
+        display: "inline-block",
+        width: '30vw',
+        height: '80vh',
+        // marginRight: 'auto',
+        // marginLeft: 'auto',
         textAlign: 'center',
     },
+    content: {
+        maxHeight:'15vh',
+        overflow: 'hidden',
+    },
     media: {
-        height: 450,
+        marginTop : "1vh",
+        height:'53vh',
     },
     center: {
         marginLeft: 'calc(50% - 16vw)',
+        marginTop : "11vh",
+        marginBottom : "2vh",
         width: '32vw',
     },
 
@@ -87,6 +92,7 @@ const SearchMovie = () => {
             <NavPanel/>
             <TextField
                 className={classes.center}
+                color="secondary"
                 id="outlined-full-width"
                 label="Wyszukaj Film"
                 placeholder="Tytuł filmu"
@@ -98,12 +104,13 @@ const SearchMovie = () => {
                 variant="outlined"
                 onChange={event => setMovieToSearch(event.target.value)}
             />
+            <br />
                         {!!movies?.movies.length &&
-                        movies?.movies.map(movie => (
-                            <Card className={classes.root} variant="outlined">
+                        movies?.movies.map((movie, index) => (
+                            <Card className={classes.root} color="secondary" variant="outlined">
                                 <CardActionArea >
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">
+                                    <CardContent className={classes.content}>
+                                        <Typography className={classes.content} gutterBottom variant="h6" component="h2">
                                             <p>{movie.title}<br />{movie.year}</p>
                                         </Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">
@@ -112,26 +119,25 @@ const SearchMovie = () => {
                                     </CardContent>
                                     <CardMedia
                                         className={classes.media}
-                                        image={movie.poster}
+                                        image={movie.poster !== "N/A" ? movie.poster : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
                                         title={movie.title}
                                     />
                                 </CardActionArea>
                                 <CardActions>
-                                    {/*TODO: zrobić zmiane buttona po dodaniu fav i fav całe*/}
-                                    {favourites.filter(el => el.id !== movie.id) ?
-                                        <Button onClick={() => handleAddFavourites(movie)} size="small" color="primary">
-                                        Dodaj do ulubionych
+                                    {favourites.filter(f => f.id === movie.id).length ?
+                                        <Button size="small" color="secondary" variant="outlined">
+                                            Usuń z ulubionych
                                         </Button>
                                         :
-                                        ''
+                                        <Button onClick={() => handleAddFavourites(movie)} size="small" color="secondary" variant="outlined">
+                                            Dodaj do ulubionych
+                                        </Button>
                                     }
 
-                                    <Button size="small" color="primary">
-                                        Nic
-                                    </Button>
+
+
                                 </CardActions>
                             </Card>
-
                         ))
                         }
 
