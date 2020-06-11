@@ -13,7 +13,7 @@ export interface IFavourites {
 export interface IFavouritesListStoreState {
     list: IFavourites[];
 }
-
+//TODO: dodać cookie to do initial store
 export const favouritesListInitialState: IFavouritesListStoreState = {
     list: [],
 };

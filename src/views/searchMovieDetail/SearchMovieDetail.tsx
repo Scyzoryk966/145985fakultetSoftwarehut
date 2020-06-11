@@ -1,11 +1,10 @@
 import React from 'react';
 import NavPanel from '../../components/navPanel/NavPanel'
-import deBounce from "../../hooks/deBounce";
 import { useService} from "../../hooks/useService";
 import { FavouritesService } from '../../services/fav.service';
 import { useSelector } from 'react-redux';
 import { favouritesSelector } from '../../store/selectors/fav.selectors';
-import { useHistory } from 'react-router';
+
 import movieService, { IMoviesProps } from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -57,19 +56,15 @@ const SearchMovie = () => {
     const classes = useStyles();
     const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
     const [movieToSearch, setMovieToSearch] = React.useState('');
-    const debounce = deBounce(movieToSearch, 500);
-    const history = useHistory();
+
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
-
-    const RedirectTo = (path: string, name: string, state: { id: string }) => <Button color="secondary" className={classes.action} onClick={() => history.push(path, state)}>{name}</Button>
-
-    //TODO: poprawić debounce
     React.useEffect(() => {
-        if (debounce){
-            movieService.searchByName(movieToSearch).then(resp => {
+
+            movieService.searchById('tt0848228').then(resp => {
                 if (resp) {
-                    setMovies(resp);
+                    //setMovies(resp);
+                    console.log(resp)
                 }
                 else
                 {
@@ -77,10 +72,7 @@ const SearchMovie = () => {
                 }
             });
 
-            //movieService.searchById('tt0848228');
-        }
-
-    }, [debounce, movieToSearch]);
+    }, []);
 
     const handleAddFavourites = (props : any) => {
         favouritesService.setNewFavourites({
@@ -106,7 +98,11 @@ const SearchMovie = () => {
     return (
         <div>
             <NavPanel/>
-            <TextField
+            <br />
+            <br />
+            <br />
+            <h1>działa</h1>
+           {/* <TextField
                 className={classes.center}
                 color="secondary"
                 id="outlined-full-width"
@@ -157,11 +153,13 @@ const SearchMovie = () => {
                                             Dodaj do ulubionych
                                         </Button>
                                     }
-                                        {RedirectTo("/searchDetail/"+movie.id, 'Szczegóły', {id: movie.id})}
+                                    <Button component={Link} to={"/search/"+movie.id} color="secondary" className={classes.action}>
+                                        Szczegóły
+                                    </Button>
                                 </CardActions>
                             </Card>
                         ))
-                        }
+                        }*/}
 
         </div>
     );
