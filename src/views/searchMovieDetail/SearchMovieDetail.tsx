@@ -35,7 +35,7 @@ const useStyles = makeStyles({
         marginBottom: "1vh",
         marginLeft: "1.5vw",
         display: "inline-block",
-        width: '65.5vw',
+        width: '64.5vw',
         height: '85vh',
         textAlign: 'left',
     },

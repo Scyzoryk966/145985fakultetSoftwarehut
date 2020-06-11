@@ -6,7 +6,8 @@ import {useSelector} from "react-redux";
 import {favouritesSelector} from "../../store/selectors/fav.selectors";
 import {useService} from "../../hooks/useService";
 import {FavouritesService} from "../../services/fav.service";
-
+import {useHistory} from "react-router";
+import {Cookies} from "react-cookie";
 
 
 const useStyles = makeStyles({
@@ -47,9 +48,23 @@ const useStyles = makeStyles({
 
 const FavPanel = () => {
     const classes = useStyles();
-
+    const history = useHistory();
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
+    const cookies = new Cookies();
+
+    const RedirectTo = (
+        path: string,
+        name: string,
+        state:
+            {
+                id: string,
+                title: string,
+                year: string,
+                type: string,
+                poster: string,
+            }
+    ) => <Button color="secondary" className={classes.action} onClick={() => history.push(path, state)}>{name}</Button>
 
     const handleDelFavourites = (props : any) => {
         favouritesService.deleteFavourites({
@@ -61,6 +76,7 @@ const FavPanel = () => {
         });
     }
 
+    cookies.set('fav', favourites, { path: '/' });
     return (
       <div>
         <NavPanel />
@@ -90,6 +106,12 @@ const FavPanel = () => {
                       >
                           Usuń z ulubionych
                       </Button>
+                      {RedirectTo("/searchDetail/"+favourites.id, 'Szczegóły', {
+                          id: favourites.id,
+                          title: favourites.title,
+                          year: favourites.year,
+                          type: favourites.type,
+                          poster: favourites.poster})}
                   </CardActions>
               </Card>
           ))
