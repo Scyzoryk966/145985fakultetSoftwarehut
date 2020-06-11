@@ -4,7 +4,7 @@ import { useService} from "../../hooks/useService";
 import { FavouritesService } from '../../services/fav.service';
 import { useSelector } from 'react-redux';
 import { favouritesSelector } from '../../store/selectors/fav.selectors';
-
+import {useHistory} from "react-router";
 import movieService, { IMoviesProps } from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +18,7 @@ import {
     Typography
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
+
 
 
 const useStyles = makeStyles({
@@ -52,15 +53,17 @@ const useStyles = makeStyles({
 });
 
 
-const SearchMovie = () => {
+const SearchMovieDetail = (props :any) => {
     const classes = useStyles();
     const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
     const [movieToSearch, setMovieToSearch] = React.useState('');
-
+    const [reciveId, setId] = React.useState('');
+    const history = useHistory();
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
-    React.useEffect(() => {
 
+    React.useEffect(() => {
+            setId(props.location.state.id)
             movieService.searchById('tt0848228').then(resp => {
                 if (resp) {
                     //setMovies(resp);
@@ -101,7 +104,7 @@ const SearchMovie = () => {
             <br />
             <br />
             <br />
-            <h1>działa</h1>
+            <h1>działa{reciveId}</h1>
            {/* <TextField
                 className={classes.center}
                 color="secondary"
@@ -165,4 +168,4 @@ const SearchMovie = () => {
     );
 };
 
-export default SearchMovie;
+export default SearchMovieDetail;
