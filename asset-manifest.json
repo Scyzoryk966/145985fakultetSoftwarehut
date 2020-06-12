@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/145985fakultetSoftwarehut/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/145985fakultetSoftwarehut/static/js/main.b822a902.chunk.js",
-    "main.js.map": "/145985fakultetSoftwarehut/static/js/main.b822a902.chunk.js.map",
+    "main.js": "/145985fakultetSoftwarehut/static/js/main.ab436cb8.chunk.js",
+    "main.js.map": "/145985fakultetSoftwarehut/static/js/main.ab436cb8.chunk.js.map",
     "runtime-main.js": "/145985fakultetSoftwarehut/static/js/runtime-main.b61864c5.js",
     "runtime-main.js.map": "/145985fakultetSoftwarehut/static/js/runtime-main.b61864c5.js.map",
     "static/js/2.78df0572.chunk.js": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js",
     "static/js/2.78df0572.chunk.js.map": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js.map",
     "index.html": "/145985fakultetSoftwarehut/index.html",
-    "precache-manifest.030030e656d7f647d19b5fea3150b737.js": "/145985fakultetSoftwarehut/precache-manifest.030030e656d7f647d19b5fea3150b737.js",
+    "precache-manifest.57e90ecc97e528efc3be5beffeca55a5.js": "/145985fakultetSoftwarehut/precache-manifest.57e90ecc97e528efc3be5beffeca55a5.js",
     "service-worker.js": "/145985fakultetSoftwarehut/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/145985fakultetSoftwarehut/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.78df0572.chunk.js.LICENSE.txt": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b61864c5.js",
     "static/js/2.78df0572.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.b822a902.chunk.js"
+    "static/js/main.ab436cb8.chunk.js"
   ]
 }
