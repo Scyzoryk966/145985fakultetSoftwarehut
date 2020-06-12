@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ab7a31748e8a1657dc225a9508ae1786",
+    "revision": "68caa4a983a7a91689d6434859c94687",
     "url": "/145985fakultetSoftwarehut/index.html"
   },
   {
-    "revision": "859166af642f330744ad",
+    "revision": "07a26d626cb142356540",
     "url": "/145985fakultetSoftwarehut/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "859166af642f330744ad",
-    "url": "/145985fakultetSoftwarehut/static/js/main.8ee865bc.chunk.js"
+    "revision": "07a26d626cb142356540",
+    "url": "/145985fakultetSoftwarehut/static/js/main.5d9716d0.chunk.js"
   },
   {
     "revision": "5799d5c5a9865b640484",
