@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/145985fakultetSoftwarehut/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/145985fakultetSoftwarehut/static/js/main.377cacc8.chunk.js",
-    "main.js.map": "/145985fakultetSoftwarehut/static/js/main.377cacc8.chunk.js.map",
+    "main.js": "/145985fakultetSoftwarehut/static/js/main.34adc4d1.chunk.js",
+    "main.js.map": "/145985fakultetSoftwarehut/static/js/main.34adc4d1.chunk.js.map",
     "runtime-main.js": "/145985fakultetSoftwarehut/static/js/runtime-main.b61864c5.js",
     "runtime-main.js.map": "/145985fakultetSoftwarehut/static/js/runtime-main.b61864c5.js.map",
-    "static/js/2.78df0572.chunk.js": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js",
-    "static/js/2.78df0572.chunk.js.map": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js.map",
+    "static/js/2.0306cca7.chunk.js": "/145985fakultetSoftwarehut/static/js/2.0306cca7.chunk.js",
+    "static/js/2.0306cca7.chunk.js.map": "/145985fakultetSoftwarehut/static/js/2.0306cca7.chunk.js.map",
     "index.html": "/145985fakultetSoftwarehut/index.html",
-    "precache-manifest.98fbd9a7ee1bab5f1da48bcd26159071.js": "/145985fakultetSoftwarehut/precache-manifest.98fbd9a7ee1bab5f1da48bcd26159071.js",
+    "precache-manifest.39ecfeda385159e495a81e6b93ab6c9e.js": "/145985fakultetSoftwarehut/precache-manifest.39ecfeda385159e495a81e6b93ab6c9e.js",
     "service-worker.js": "/145985fakultetSoftwarehut/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/145985fakultetSoftwarehut/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.78df0572.chunk.js.LICENSE.txt": "/145985fakultetSoftwarehut/static/js/2.78df0572.chunk.js.LICENSE.txt"
+    "static/js/2.0306cca7.chunk.js.LICENSE.txt": "/145985fakultetSoftwarehut/static/js/2.0306cca7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b61864c5.js",
-    "static/js/2.78df0572.chunk.js",
+    "static/js/2.0306cca7.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.377cacc8.chunk.js"
+    "static/js/main.34adc4d1.chunk.js"
   ]
 }
