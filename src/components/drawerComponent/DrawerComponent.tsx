@@ -50,7 +50,7 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                         className={classes.button}
                         startIcon={<HomeIcon />}
                     >
-                        {RedirectTo('/', 'Home')}
+                        {RedirectTo('/145985fakultetSoftwarehut/', 'Home')}
                     </Button>
                     <Button
                         variant="contained"
@@ -58,7 +58,7 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                         className={classes.button}
                         startIcon={<MovieIcon />}
                     >
-                        {RedirectTo('/movie', 'Movie')}
+                        {RedirectTo('/145985fakultetSoftwarehut/movie', 'Movie')}
                     </Button>
                     <Button
                         variant="contained"
@@ -66,7 +66,7 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                         className={classes.button}
                         startIcon={<SearchIcon />}
                     >
-                        {RedirectTo('/search', 'Search')}
+                        {RedirectTo('/145985fakultetSoftwarehut/search', 'Search')}
                     </Button>
                     <Button
                         variant="contained"
@@ -74,7 +74,7 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                         className={classes.button}
                         startIcon={<FavoriteIcon />}
                     >
-                        {RedirectTo('/fav', 'Favourites')}
+                        {RedirectTo('/145985fakultetSoftwarehut/fav', 'Favourites')}
                     </Button>
                 </div>
             </Drawer>

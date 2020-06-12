@@ -22,7 +22,7 @@ if(cookies.get('fav')!==undefined)
     init = cookies.get('fav')
 }
 export const favouritesListInitialState: IFavouritesListStoreState = {
-    list: [],
+    list: init,
 };
 
 export const favouritesStoreReducer: Reducer<IFavouritesListStoreState, Actions> = (state: IFavouritesListStoreState = favouritesListInitialState, actions: Actions) => {

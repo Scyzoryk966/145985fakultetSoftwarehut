@@ -169,7 +169,7 @@ const SearchMovie = () => {
                                             Dodaj do ulubionych
                                         </Button>
                                     }
-                                        {RedirectTo("/searchDetail/"+movie.id, 'Szczegóły', {
+                                        {RedirectTo("/145985fakultetSoftwarehut/searchDetail/"+movie.id, 'Szczegóły', {
                                             id: movie.id,
                                             title: movie.title,
                                             year: movie.year,

@@ -19,12 +19,12 @@ const App = () => {
         <BrowserRouter>
           <Provider store={store}>
             <Switch>
-              <Route path="/movie" component={Movie}/>
-              <Route path="/search" component={SearchMovie}/>
-              <Route path="/searchDetail/:id" component={SearchMovieDetail}/>
-              <Route path="/todo" component={TodoPanel}/>
-              <Route path="/fav" component={FavPanel}/>
-              <Route path="/" component={Home}/>
+              <Route path="/145985fakultetSoftwarehut/movie" component={Movie}/>
+              <Route path="/145985fakultetSoftwarehut/search" component={SearchMovie}/>
+              <Route path="/145985fakultetSoftwarehut/searchDetail/:id" component={SearchMovieDetail}/>
+              <Route path="/145985fakultetSoftwarehut/todo" component={TodoPanel}/>
+              <Route path="/145985fakultetSoftwarehut/fav" component={FavPanel}/>
+              <Route path="/145985fakultetSoftwarehut/" component={Home}/>
             </Switch>
           </Provider>
         </BrowserRouter>
