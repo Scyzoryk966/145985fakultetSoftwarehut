@@ -16,7 +16,7 @@ import {
     CardActionArea,
     CardActions,
     CardContent,
-    CardMedia,
+    CardMedia, CircularProgress,
     Typography
 } from "@material-ui/core";
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
         marginLeft: "1.5vw",
         display: "inline-block",
         width: '30vw',
-        height: '80vh',
+        height: 'auto',
         textAlign: 'center',
     },
     content: {
@@ -51,6 +51,11 @@ const useStyles = makeStyles({
         marginRight: 'auto',
         marginLeft: 'auto',
     },
+    loading: {
+        marginLeft: 'calc(50% - 4vw)',
+        marginTop : "11vh",
+        marginBottom : "2vh",
+    },
 });
 
 
@@ -58,7 +63,8 @@ const SearchMovie = () => {
     const classes = useStyles();
     const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
     const [movieToSearch, setMovieToSearch] = React.useState('');
-    const debounce = deBounce(movieToSearch, 500);
+    const [isLoading, setLoading] = React.useState(false);
+    const debounce = deBounce(movieToSearch, 300);
     const history = useHistory();
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
@@ -83,9 +89,11 @@ const SearchMovie = () => {
             movieService.searchByName(movieToSearch).then(resp => {
                 if (resp) {
                     setMovies(resp);
+                    setLoading(false)
                 }
                 else
                 {
+                    setLoading(true)
                     setMovies(null);
                 }
             });
@@ -130,55 +138,64 @@ const SearchMovie = () => {
                     shrink: true,
                 }}
                 variant="outlined"
-                onChange={event => setMovieToSearch(event.target.value)}
+                onChange={event => {
+                    setMovieToSearch(event.target.value)
+                    setLoading(true)
+                }}
             />
             <br />
-                        {!!movies?.movies.length &&
-                        movies?.movies.map((movie, index) => (
-                            <Card className={classes.root} color="secondary" variant="outlined">
-                                <CardActionArea >
-                                    <CardContent className={classes.content}>
-                                        <Typography className={classes.content} gutterBottom variant="h6" component="h2">
-                                            <p>{movie.title}<br />{movie.year}</p>
-                                        </Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">
-                                            {movie.type}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardMedia
-                                        className={classes.media}
-                                        image={movie.poster !== "N/A" ? movie.poster : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
-                                        title={movie.title}
-                                    />
-                                </CardActionArea>
-                                <CardActions>
-                                    {favourites.filter(f => f.id === movie.id).length ?
-                                        <Button onClick={() => handleDelFavourites(movie)}
-                                                size="small"
-                                                color="secondary" variant="outlined"
-                                                className={classes.action}
-                                        >
-                                            Usuń z ulubionych
-                                        </Button>
-                                        :
-                                        <Button onClick={() => handleAddFavourites(movie)}
-                                                size="small"
-                                                color="secondary" variant="outlined"
-                                                className={classes.action}
-                                        >
-                                            Dodaj do ulubionych
-                                        </Button>
-                                    }
-                                        {RedirectTo("/145985fakultetSoftwarehut/searchDetail/"+movie.id, 'Szczegóły', {
-                                            id: movie.id,
-                                            title: movie.title,
-                                            year: movie.year,
-                                            type: movie.type,
-                                            poster: movie.poster})}
-                                </CardActions>
-                            </Card>
-                        ))
+            {isLoading ?
+                <div className={classes.loading}>
+                    <CircularProgress color="secondary" size="8vw" />
+                </div>
+                :
+                ''}
+            {!!movies?.movies.length &&
+            movies?.movies.map((movie, index) => (
+                <Card className={classes.root} color="secondary" variant="outlined">
+                    <CardActionArea >
+                        <CardContent className={classes.content}>
+                            <Typography className={classes.content} gutterBottom variant="h6" component="h2">
+                                <p>{movie.title}<br />{movie.year}</p>
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {movie.type}
+                            </Typography>
+                        </CardContent>
+                        <CardMedia
+                            className={classes.media}
+                            image={movie.poster !== "N/A" ? movie.poster : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg'}
+                            title={movie.title}
+                        />
+                    </CardActionArea>
+                    <CardActions>
+                        {favourites.filter(f => f.id === movie.id).length ?
+                            <Button onClick={() => handleDelFavourites(movie)}
+                                    size="small"
+                                    color="secondary" variant="outlined"
+                                    className={classes.action}
+                            >
+                                Usuń z ulubionych
+                            </Button>
+                            :
+                            <Button onClick={() => handleAddFavourites(movie)}
+                                    size="small"
+                                    color="secondary" variant="outlined"
+                                    className={classes.action}
+                            >
+                                Dodaj do ulubionych
+                            </Button>
                         }
+                        {RedirectTo("/145985fakultetSoftwarehut/searchDetail/"+movie.id, 'Szczegóły', {
+                            id: movie.id,
+                            title: movie.title,
+                            year: movie.year,
+                            type: movie.type,
+                            poster: movie.poster})}
+                    </CardActions>
+                </Card>
+            ))
+            }
 
         </div>
     );
