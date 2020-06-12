@@ -4,9 +4,9 @@ import { useService} from "../../hooks/useService";
 import { FavouritesService } from '../../services/fav.service';
 import { useSelector } from 'react-redux';
 import { favouritesSelector } from '../../store/selectors/fav.selectors';
-import movieService, { IMoviesProps } from '../../services/movies.service';
+import movieService from '../../services/movies.service';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+
 import {
     Button,
     Card,
@@ -122,7 +122,7 @@ const SearchMovieDetail = (props :any) => {
             }
         });
         console.log('halo?')
-    },[reciveMovie]);
+    },[props.location.state, reciveMovie]);
 
     const handleAddFavourites = (props : any) => {
         favouritesService.setNewFavourites({
