@@ -22,10 +22,9 @@ if(cookies.get('fav')!==undefined)
     init = cookies.get('fav')
 }
 export const favouritesListInitialState: IFavouritesListStoreState = {
-    list: init,
+    list: [],
 };
 
-console.log(cookies.get('myCat'))
 export const favouritesStoreReducer: Reducer<IFavouritesListStoreState, Actions> = (state: IFavouritesListStoreState = favouritesListInitialState, actions: Actions) => {
     switch (actions.type) {
         case FavouritesStoreActions.SET_NEW_FAV :
