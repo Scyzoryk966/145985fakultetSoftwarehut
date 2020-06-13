@@ -31,7 +31,19 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
     const [isOpen, setIsOpen] = React.useState(false);
     const history = useHistory();
 
-    const RedirectTo = (path: string, name: string) => <div onClick={() => history.push(path)}>{name}</div>
+    const RedirectTo = (path: string, name: string, startIcon: any) => (<Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={startIcon}
+        onClick={() => history.push(path)}
+    >{name}</Button>)
+
+
+
+{/*
+    <div onClick={() => history.push(path)}>{name}</div>
+*/}
 
 
     return (
@@ -44,38 +56,11 @@ const DrawerComponent: React.FC<IDrawerComponentProps> = ({ shouldBeOpen, onDraw
                 }}
             >
                 <div className={classes.drawerContent}>
-                    <Button
-                        variant="contained"
-                        color="default"
-                        className={classes.button}
-                        startIcon={<HomeIcon />}
-                    >
-                        {RedirectTo('/145985fakultetSoftwarehut/', 'Home')}
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="default"
-                        className={classes.button}
-                        startIcon={<MovieIcon />}
-                    >
-                        {RedirectTo('/145985fakultetSoftwarehut/movie', 'Movie')}
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="default"
-                        className={classes.button}
-                        startIcon={<SearchIcon />}
-                    >
-                        {RedirectTo('/145985fakultetSoftwarehut/search', 'Search')}
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="default"
-                        className={classes.button}
-                        startIcon={<FavoriteIcon />}
-                    >
-                        {RedirectTo('/145985fakultetSoftwarehut/fav', 'Favourites')}
-                    </Button>
+
+                        {RedirectTo('/145985fakultetSoftwarehut/', 'Home', <HomeIcon />)}
+                        {RedirectTo('/145985fakultetSoftwarehut/movie', 'Movie', <MovieIcon />)}
+                        {RedirectTo('/145985fakultetSoftwarehut/search', 'Search', <SearchIcon />)}
+                        {RedirectTo('/145985fakultetSoftwarehut/fav', 'Favourites', <FavoriteIcon />)}
                 </div>
             </Drawer>
         </div>
