@@ -85,16 +85,18 @@ const SearchMovie = () => {
 
     React.useEffect(() => {
         if (debounce){
+            setLoading(true);
             movieService.searchByName(debounce).then(resp => {
                 if (resp) {
                     setMovies(resp);
+                    setLoading(false);
                 }
                 else
                 {
                     setMovies(null);
+                    setLoading(false);
                 }
             });
-            setLoading(false);
         }
 
     }, [debounce]);
