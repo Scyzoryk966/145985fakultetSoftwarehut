@@ -150,7 +150,7 @@ const SearchMovie = () => {
                 ''}
             {!!movies?.movies.length &&
             movies?.movies.map((movie, index) => (
-                <Card className={classes.root} color="secondary" variant="outlined">
+                <Card key={index} className={classes.root} color="secondary" variant="outlined">
                     <CardActionArea >
                         <CardContent className={classes.content}>
                             <Typography className={classes.content} gutterBottom variant="h6" component="h2">
