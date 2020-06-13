@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
     center: {
         marginLeft: 'calc(50% - 16vw)',
-        marginTop : "11vh",
+        marginTop : '11vh',
         marginBottom : "2vh",
         width: '30vw',
     },
@@ -64,7 +64,7 @@ const SearchMovie = () => {
     const [movies, setMovies] = React.useState<IMoviesProps | null>(null);
     const [movieToSearch, setMovieToSearch] = React.useState('');
     const [isLoading, setLoading] = React.useState(false);
-    const debounce = deBounce(movieToSearch, 300);
+    const debounce = deBounce(movieToSearch, 500);
     const history = useHistory();
     const favouritesService = useService(FavouritesService);
     const favourites = useSelector(favouritesSelector);
@@ -83,25 +83,21 @@ const SearchMovie = () => {
             }
     ) => <Button color="secondary" className={classes.action} onClick={() => history.push(path, state)}>{name}</Button>
 
-    //TODO: poprawić debounce
     React.useEffect(() => {
         if (debounce){
-            movieService.searchByName(movieToSearch).then(resp => {
+            movieService.searchByName(debounce).then(resp => {
                 if (resp) {
                     setMovies(resp);
-                    setLoading(false)
                 }
                 else
                 {
-                    setLoading(true)
                     setMovies(null);
                 }
             });
-
-            //movieService.searchById('tt0848228');
+            setLoading(false);
         }
 
-    }, [debounce, movieToSearch]);
+    }, [debounce]);
 
     const handleAddFavourites = (props : any) => {
         favouritesService.setNewFavourites({

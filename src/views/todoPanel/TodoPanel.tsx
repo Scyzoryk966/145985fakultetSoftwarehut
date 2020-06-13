@@ -16,7 +16,7 @@ const TodoPanel = () => {
       description: 'opis todo',
       id: 1
     });
-  }, []);
+  }, [todoService]);
 
 
   return <div>{todos.map((todo, index) => <div key={index}>{todo.label}</div>)}</div>;
